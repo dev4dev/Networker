@@ -18,6 +18,7 @@
 		6305D68022CF751F0055DCD2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6305D67E22CF751F0055DCD2 /* LaunchScreen.storyboard */; };
 		6305D68E22CF772B0055DCD2 /* Result+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6305D68D22CF772B0055DCD2 /* Result+Additions.swift */; };
 		6305D69222CF82CC0055DCD2 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6305D69122CF82CC0055DCD2 /* Model.swift */; };
+		6305D69522CF8D770055DCD2 /* Networker+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6305D69422CF8D770055DCD2 /* Networker+Rx.swift */; };
 		C65FD23C52758778DAF404B9 /* Pods_Demo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88936EF9FAC51A732CFC2CF7 /* Pods_Demo.framework */; };
 /* End PBXBuildFile section */
 
@@ -48,6 +49,7 @@
 		6305D68122CF751F0055DCD2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6305D68D22CF772B0055DCD2 /* Result+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Result+Additions.swift"; sourceTree = "<group>"; };
 		6305D69122CF82CC0055DCD2 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		6305D69422CF8D770055DCD2 /* Networker+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Networker+Rx.swift"; sourceTree = "<group>"; };
 		71499F8127E0EFDF2457CEC6 /* Pods-Networker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Networker.release.xcconfig"; path = "Target Support Files/Pods-Networker/Pods-Networker.release.xcconfig"; sourceTree = "<group>"; };
 		88936EF9FAC51A732CFC2CF7 /* Pods_Demo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Demo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D64ED77C21047375EB103E28 /* Pods-Networker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Networker.debug.xcconfig"; path = "Target Support Files/Pods-Networker/Pods-Networker.debug.xcconfig"; sourceTree = "<group>"; };
@@ -107,6 +109,7 @@
 		6305D66122CF3C7D0055DCD2 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				6305D69322CF8D5F0055DCD2 /* Rx */,
 				6305D66222CF3C7D0055DCD2 /* Networker.h */,
 				6305D66322CF3C7D0055DCD2 /* Info.plist */,
 				6305D66A22CF3C8C0055DCD2 /* Networker.swift */,
@@ -135,6 +138,14 @@
 				6305D69122CF82CC0055DCD2 /* Model.swift */,
 			);
 			path = Demo;
+			sourceTree = "<group>";
+		};
+		6305D69322CF8D5F0055DCD2 /* Rx */ = {
+			isa = PBXGroup;
+			children = (
+				6305D69422CF8D770055DCD2 /* Networker+Rx.swift */,
+			);
+			path = Rx;
 			sourceTree = "<group>";
 		};
 		BCF8130AB713EBA8206B0F2C /* Pods */ = {
@@ -331,6 +342,7 @@
 				6305D68E22CF772B0055DCD2 /* Result+Additions.swift in Sources */,
 				6305D66E22CF69060055DCD2 /* AlamofireNetworker.swift in Sources */,
 				6305D66B22CF3C8C0055DCD2 /* Networker.swift in Sources */,
+				6305D69522CF8D770055DCD2 /* Networker+Rx.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

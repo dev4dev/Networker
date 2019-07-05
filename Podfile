@@ -3,6 +3,7 @@ platform :ios, '11.0'
 
 def pods 
   pod 'Alamofire'
+  pod 'RxSwift'
 end
 
 ['Networker', 'Demo'].each do |name|

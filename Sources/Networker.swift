@@ -42,8 +42,7 @@ public protocol Networker {
     
     init(config: NetworkConfiguration)
     func requestData(method: MethodsType, url: URL, parameters: ParametersType, options: [Option], completion: @escaping (Result<Data, ErrorType>) -> Void) -> CancellableRequest
-    func requestJSON(method: MethodsType, url: URL, parameters: ParametersType, options: [Option], completion: @escaping (Result<JSONType, ErrorType>) -> Void) -> CancellableRequest
-    
+    func requestJSON(method: MethodsType, url: URL, parameters: ParametersType, options: [Option], completion: @escaping (Result<JSONType, ErrorType>) -> Void) -> CancellableRequest    
 }
 
 public protocol CancellableRequest {
