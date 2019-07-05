@@ -8,12 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		6305D66422CF3C7D0055DCD2 /* Networker.h in Headers */ = {isa = PBXBuildFile; fileRef = 6305D66222CF3C7D0055DCD2 /* Networker.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6305D66B22CF3C8C0055DCD2 /* Networker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6305D66A22CF3C8C0055DCD2 /* Networker.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		6305D65F22CF3C7D0055DCD2 /* Networker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Networker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6305D66222CF3C7D0055DCD2 /* Networker.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Networker.h; sourceTree = "<group>"; };
 		6305D66322CF3C7D0055DCD2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6305D66A22CF3C8C0055DCD2 /* Networker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networker.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -30,7 +32,7 @@
 		6305D65522CF3C7D0055DCD2 = {
 			isa = PBXGroup;
 			children = (
-				6305D66122CF3C7D0055DCD2 /* Networker */,
+				6305D66122CF3C7D0055DCD2 /* Sources */,
 				6305D66022CF3C7D0055DCD2 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -43,13 +45,14 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		6305D66122CF3C7D0055DCD2 /* Networker */ = {
+		6305D66122CF3C7D0055DCD2 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
 				6305D66222CF3C7D0055DCD2 /* Networker.h */,
 				6305D66322CF3C7D0055DCD2 /* Info.plist */,
+				6305D66A22CF3C8C0055DCD2 /* Networker.swift */,
 			);
-			path = Networker;
+			path = Sources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -95,6 +98,7 @@
 				TargetAttributes = {
 					6305D65E22CF3C7D0055DCD2 = {
 						CreatedOnToolsVersion = 10.2.1;
+						LastSwiftMigration = 1020;
 					};
 				};
 			};
@@ -130,6 +134,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6305D66B22CF3C8C0055DCD2 /* Networker.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -261,6 +266,7 @@
 		6305D66822CF3C7D0055DCD2 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
@@ -277,6 +283,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = me.antonyuk.Networker;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -285,6 +292,7 @@
 		6305D66922CF3C7D0055DCD2 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
