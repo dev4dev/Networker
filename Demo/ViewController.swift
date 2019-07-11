@@ -10,6 +10,7 @@ import UIKit
 import Networker
 import RxSwift
 import Alamofire
+import RxCocoa
 
 //extension HTTPMethod: CustomStringConvertible {
 //    public var description: String {
@@ -32,6 +33,9 @@ class ViewController: UIViewController {
     }
     
     let url = URL(string: "https://api.cryptonator.com/api/ticker/btc-usd")!
+    lazy var api = APIClient(network: simple)
+    
+    @IBOutlet weak var output: UILabel!
 
     @IBAction private func doRequest(_ sender: UIButton) {
 //        network.requestJSON(method: .get, url: URL(string: "https://api.cryptonator.com/api/ticker/btc-usd")!) { result in
@@ -63,16 +67,18 @@ class ViewController: UIViewController {
 //            print(error)
 //        }.disposed(by: trash)
         
-        networker.requestData(url: url, method: .get).asObservable().toModel().subscribe(onNext: { (model: Model) in
-            print("1", model)
-            print(model.toJSONData()?.toJSON())
-        }, onError: { error in
-            print(error)
-        }).disposed(by: trash)
+//        networker.requestData(url: url, method: .get).asObservable().toModel().subscribe(onNext: { (model: Model) in
+//            print("1", model)
+//            print(model.toJSONData()?.toJSON())
+//        }, onError: { error in
+//            print(error)
+//        }).disposed(by: trash)
+//
+//        simple.requestData(url: url, method: .get).toModel().subscribe(onSuccess: { (model: Model) in
+//            print("2", model)
+//        }).disposed(by: trash)
         
-        simple.requestData(url: url, method: .get).toModel().subscribe(onSuccess: { (model: Model) in
-            print("2", model)
-        }).disposed(by: trash)
+        api.bitcoinData().map { $0.price }.asDriver(onErrorJustReturn: "0.0").drive(output.rx.text).disposed(by: trash)
     }
 
 }
