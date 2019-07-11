@@ -9,10 +9,10 @@
 import Foundation
 import RxSwift
 
-public extension Reactive where Base == Networker {
+public extension Networker {
     func requestData(url: URL, method: HTTPMethod, parameters: [String: Any] = [:], options: [Option] = []) -> Single<Data> {
         return Single.create { s in
-            let request = self.base.requestData(url: url, method: method, parameters: parameters, options: options, completion: { result in
+            let request = self.requestData(url: url, method: method, parameters: parameters, options: options, completion: { result in
                 switch result {
                 case .success(let data):
                     s(.success(data))
@@ -25,45 +25,10 @@ public extension Reactive where Base == Networker {
             }
         }
     }
-    
-    @discardableResult
-    func requestJSON(url: URL, method: HTTPMethod, parameters: [String: Any] = [:], options: [Option] = []) -> Single<JSONType> {
-        return Single.create { s in
-            let request = self.base.requestJSON(url: url, method: method, parameters: parameters, options: options, completion: { result in
-                switch result {
-                case .success(let json):
-                    s(.success(json))
-                case .failure(let error):
-                    s(.error(error))
-                }
-            })
-            return Disposables.create {
-                request.cancel()
-            }
-        }
-    }
-    
-    @discardableResult
+
     func requestData(request: URLRequest) -> Single<Data> {
         return Single.create { s in
-            let request = self.base.requestData(request: request, completion: { result in
-                switch result {
-                case .success(let data):
-                    s(.success(data))
-                case .failure(let error):
-                    s(.error(error))
-                }
-            })
-            return Disposables.create {
-                request.cancel()
-            }
-        }
-    }
-    
-    @discardableResult
-    func requestJSON(request: URLRequest) -> Single<JSONType> {
-        return Single.create { s in
-            let request = self.base.requestJSON(request: request, completion: { result in
+            let request = self.requestData(request: request, completion: { result in
                 switch result {
                 case .success(let data):
                     s(.success(data))
@@ -78,4 +43,24 @@ public extension Reactive where Base == Networker {
     }
 }
 
-extension Networker: ReactiveCompatible {}
+public extension Observable where Element == Data {
+    func toJSON() -> Observable<JSONType> {
+        return map { data -> JSONType in
+            if let json = try JSONSerialization.jsonObject(with: data, options: []) as? JSONType {
+                return json
+            } else {
+                throw "Eror while parsing json data"
+            }
+        }
+    }
+    
+    func toModel<ObjectType: Decodable>() -> Observable<ObjectType> {
+        return map { data -> ObjectType in
+            if let model = data.toModel() as ObjectType? {
+                return model
+            } else {
+                throw "Error during object mapping"
+            }
+        }
+    }
+}

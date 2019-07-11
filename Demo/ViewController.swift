@@ -62,8 +62,11 @@ class ViewController: UIViewController {
 //            print(error)
 //        }.disposed(by: trash)
         
-        networker.rx.requestJSON(url: url, method: .get).subscribe(onSuccess: { json in
-            print(json)
+        networker.requestData(url: url, method: .get).asObservable().toModel().subscribe(onNext: { (model: Model) in
+            print(model)
+            print(model.toJSONData()?.toJSON())
+        }, onError: { error in
+            print(error)
         }).disposed(by: trash)
     }
 

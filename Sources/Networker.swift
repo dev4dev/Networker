@@ -98,6 +98,27 @@ public final class Networker {
     }
     
     @discardableResult
+    public func requestObject<ObjectType: Decodable>(url: URL, method: HTTPMethod, parameters: [String: Any] = [:], options: [Option] = [], completion: @escaping (Swift.Result<ObjectType, Error>) -> Void) -> CancellableRequest {
+        let request = self.request(url: url, method: method, parameters: parameters, options: options)
+        request.responseData(completionHandler: { response in
+            switch response.result {
+            case .success(let data):
+                let decoder = JSONDecoder()
+                do {
+                    let obj = try decoder.decode(ObjectType.self, from: data)
+                    completion(.success(obj))
+                } catch {
+                    completion(.failure(error))
+                }
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        })
+        
+        return request
+    }
+    
+    @discardableResult
     public func requestData(request: URLRequest, completion: @escaping (Swift.Result<Data, Error>) -> Void) -> CancellableRequest {
         let request = session.request(request)
         request.responseData { response in
