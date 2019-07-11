@@ -40,7 +40,7 @@ final class DefaultRetrier: RequestRetrier {
 }
 
 public final class AlamofireNetworker: Networker {
-    public typealias MethodsType = HTTPMethod
+    
     public typealias ParametersType = Parameters
     public typealias ErrorType = Error
     public typealias JSONType = [AnyHashable: Any]
@@ -62,13 +62,20 @@ public final class AlamofireNetworker: Networker {
         session.startRequestsImmediately = true
     }
     
-    private func request(method: HTTPMethod, url: URL, parameters: Parameters, options: [Option]) -> DataRequest {
-        var headers: HTTPHeaders? = nil
+    public func buildRequest<HTTPMethod>(url: URL, method: HTTPMethod, parameters: [String : Any], options: [Option]) -> URLRequest where HTTPMethod : CustomStringConvertible {
+        var request = URLRequest(url: url)
+        request.httpMethod = method.description
+        
         var encoding: ParameterEncoding = JSONEncoding.default
         for option in options {
             switch option {
             case .headers(let h):
-                headers = h
+                var rh = request.allHTTPHeaderFields ?? [:]
+                for (key, value) in h {
+                    rh[key] = value
+                }
+                request.allHTTPHeaderFields = rh
+
             case.encoding(let enc):
                 switch enc {
                 case .JSON:
@@ -79,13 +86,16 @@ public final class AlamofireNetworker: Networker {
             }
         }
         
-        let request = session.request(url, method: method, parameters: parameters, encoding: encoding, headers: headers)
+        if let encoded = try? encoding.encode(request, with: parameters) {
+            request = encoded
+        }
+
         return request
     }
     
     @discardableResult
-    public func requestData(method: HTTPMethod, url: URL, parameters: Parameters = [:], options: [Option] = [], completion: @escaping (Swift.Result<Data, ErrorType>) -> Void) -> CancellableRequest {
-        let request = self.request(method: method, url: url, parameters: parameters, options: options)
+    public func requestData(request: URLRequest, completion: @escaping (Swift.Result<Data, Error>) -> Void) -> CancellableRequest {
+        let request = session.request(request)
         request.responseData { response in
             switch response.result {
             case .success(let data):
@@ -99,8 +109,8 @@ public final class AlamofireNetworker: Networker {
     }
     
     @discardableResult
-    public func requestJSON(method: HTTPMethod, url: URL, parameters: Parameters = [:], options: [Option] = [], completion: @escaping (Swift.Result<[AnyHashable : Any], Error>) -> Void) -> CancellableRequest {
-        let request = self.request(method: method, url: url, parameters: parameters, options: options)
+    public func requestJSON(request: URLRequest, completion: @escaping (Swift.Result<JSONType, Error>) -> Void) -> CancellableRequest {
+        let request = session.request(request)
         request.responseJSON(completionHandler: { response in
             switch response.result {
             case .success(let data):

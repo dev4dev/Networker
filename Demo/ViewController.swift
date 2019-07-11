@@ -9,12 +9,20 @@
 import UIKit
 import Networker
 import RxSwift
+import Alamofire
+
+extension HTTPMethod: CustomStringConvertible {
+    public var description: String {
+        return rawValue
+    }
+}
 
 class ViewController: UIViewController {
     
     private let trash = DisposeBag()
     
-    let network = AlamofireNetworker(config: NetworkConfiguration())
+    let network: Networker = AlamofireNetworker(config: NetworkConfiguration())
+    let alamo = AlamofireNetworker(config: NetworkConfiguration())
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,11 +35,29 @@ class ViewController: UIViewController {
 //            print(json)
 //        }
         
-        network.rx.requestJSON(method: .get, url: URL(string: "https://api.cryptonator.com/api/ticker/btc-usd")!, parameters: [:]).subscribe(onSuccess: { json in
+//        network.rx.requestJSON(url: URL(string: "https://api.cryptonator.com/api/ticker/btc-usd")!, method: .get, parameters: [:]).subscribe(onSuccess: { json in
+//            print(json)
+//        }) { error in
+//            print(error)
+//        }.disposed(by: trash)
+        
+        network.requestJSON(request: URLRequest(url: URL(string: "https://api.cryptonator.com/api/ticker/btc-usd")!)) { result in
+            print(result)
+        }
+        
+        network.rx_requestJSON(url: URL(string: "https://api.cryptonator.com/api/ticker/btc-usd")!, method: HTTPMethod.get, parameters: [:], options: []).subscribe { json in
             print(json)
-        }) { error in
-            print(error)
         }.disposed(by: trash)
+        
+        alamo.rx.requestJSON(url: URL(string: "https://api.cryptonator.com/api/ticker/btc-usd")!, method: HTTPMethod.get, parameters: [:], options: []).subscribe { json in
+            print(json)
+        }.disposed(by: trash)
+        
+//        network.rx.requestJSON(url: URL(string: "https://api.cryptonator.com/api/ticker/btc-usd")!, method: HTTPMethod.get, parameters: [:]).subscribe(onSuccess: { json in
+//            print(json)
+//        }) { error in
+//            print(error)
+//        }.disposed(by: trash)
         
     }
 

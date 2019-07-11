@@ -10,9 +10,26 @@ import Foundation
 import RxSwift
 
 public extension Reactive where Base: Networker {
-    func requestData(method: Base.MethodsType, url: URL, parameters: Base.ParametersType, options: [Option] = []) -> Single<Data> {
+    func requestData(request: URLRequest) -> Single<Data> {
         return Single.create { single in
-            let request = self.base.requestData(method: method, url: url, parameters: parameters, options: options, completion: { result in
+            let request = self.base.requestData(request: request, completion: { result in
+                switch result {
+                case .success(let value):
+                    single(.success(value))
+                case .failure(let error):
+                    single(.error(error))
+                }
+            })
+            
+            return Disposables.create {
+                request.cancel()
+            }
+        }
+    }
+
+    func requestJSON(request: URLRequest) -> Single<JSONType> {
+        return Single.create { single in
+            let request = self.base.requestJSON(request: request, completion: { result in
                 switch result {
                 case .success(let value):
                     single(.success(value))
@@ -27,9 +44,19 @@ public extension Reactive where Base: Networker {
         }
     }
     
-    func requestJSON(method: Base.MethodsType, url: URL, parameters: Base.ParametersType, options: [Option] = []) -> Single<Base.JSONType> {
+    func requestData<HTTPMethod: CustomStringConvertible>(url: URL, method: HTTPMethod, parameters: [String: Any], options: [Option]) -> Single<Data> {
+        return requestData(request: self.base.buildRequest(url: url, method: method, parameters: parameters, options: options))
+    }
+    
+    func requestJSON<HTTPMethod: CustomStringConvertible>(url: URL, method: HTTPMethod, parameters: [String: Any], options: [Option]) -> Single<JSONType> {
+        return requestJSON(request: self.base.buildRequest(url: url, method: method, parameters: parameters, options: options))
+    }
+}
+
+public extension Networker {
+    func rx_requestData(request: URLRequest) -> Single<Data> {
         return Single.create { single in
-            let request = self.base.requestJSON(method: method, url: url, parameters: parameters, options: options, completion: { result in
+            let request = self.requestData(request: request, completion: { result in
                 switch result {
                 case .success(let value):
                     single(.success(value))
@@ -43,42 +70,31 @@ public extension Reactive where Base: Networker {
             }
         }
     }
+    
+    func rx_requestJSON(request: URLRequest) -> Single<JSONType> {
+        return Single.create { single in
+            let request = self.requestJSON(request: request, completion: { result in
+                switch result {
+                case .success(let value):
+                    single(.success(value))
+                case .failure(let error):
+                    single(.error(error))
+                }
+            })
+            
+            return Disposables.create {
+                request.cancel()
+            }
+        }
+    }
+    
+    func rx_requestData<HTTPMethod: CustomStringConvertible>(url: URL, method: HTTPMethod, parameters: [String: Any], options: [Option]) -> Single<Data> {
+        return rx_requestData(request: buildRequest(url: url, method: method, parameters: parameters, options: options))
+    }
+    
+    func rx_requestJSON<HTTPMethod: CustomStringConvertible>(url: URL, method: HTTPMethod, parameters: [String: Any], options: [Option]) -> Single<JSONType> {
+        return rx_requestJSON(request: buildRequest(url: url, method: method, parameters: parameters, options: options))
+    }
 }
-
-//public extension Networker where Self: ReactiveCompatible {
-//    func requestData(method: Self.MethodsType, url: URL, parameters: Self.ParametersType, options: [Option] = []) -> Single<Data> {
-//        return Single.create { single in
-//            let request = self.requestData(method: method, url: url, parameters: parameters, options: options, completion: { result in
-//                switch result {
-//                case .success(let value):
-//                    single(.success(value))
-//                case .failure(let error):
-//                    single(.error(error))
-//                }
-//            })
-//            
-//            return Disposables.create {
-//                request.cancel()
-//            }
-//        }
-//    }
-//    
-//    func requestJSON(method: Self.MethodsType, url: URL, parameters: Self.ParametersType, options: [Option] = []) -> Single<Self.JSONType> {
-//        return Single.create { single in
-//            let request = self.requestJSON(method: method, url: url, parameters: parameters, options: options, completion: { result in
-//                switch result {
-//                case .success(let value):
-//                    single(.success(value))
-//                case .failure(let error):
-//                    single(.error(error))
-//                }
-//            })
-//            
-//            return Disposables.create {
-//                request.cancel()
-//            }
-//        }
-//    }
-//}
 
 extension AlamofireNetworker: ReactiveCompatible {}

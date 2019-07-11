@@ -13,6 +13,8 @@ public enum Encoding {
     case URL
 }
 
+public typealias JSONType = [AnyHashable: Any]
+
 public enum Option {
     case headers([String: String])
     case encoding(Encoding)
@@ -35,16 +37,29 @@ public struct NetworkConfiguration {
 }
 
 public protocol Networker {
-    associatedtype MethodsType
-    associatedtype ParametersType
-    associatedtype ErrorType: Error
-    associatedtype JSONType
-    
     init(config: NetworkConfiguration)
-    func requestData(method: MethodsType, url: URL, parameters: ParametersType, options: [Option], completion: @escaping (Result<Data, ErrorType>) -> Void) -> CancellableRequest
-    func requestJSON(method: MethodsType, url: URL, parameters: ParametersType, options: [Option], completion: @escaping (Result<JSONType, ErrorType>) -> Void) -> CancellableRequest    
+    func buildRequest<HTTPMethod: CustomStringConvertible>(url: URL, method: HTTPMethod, parameters: [String: Any], options: [Option]) -> URLRequest
+    @discardableResult
+    func requestData(request: URLRequest, completion: @escaping (Result<Data, Error>) -> Void) -> CancellableRequest
+    @discardableResult
+    func requestJSON(request: URLRequest, completion: @escaping (Result<JSONType, Error>) -> Void) -> CancellableRequest
+    @discardableResult
+    func requestData<HTTPMethod: CustomStringConvertible>(url: URL, method: HTTPMethod, parameters: [String: Any], options: [Option], completion: @escaping (Result<Data, Error>) -> Void) -> CancellableRequest
+    @discardableResult
+    func requestJSON<HTTPMethod: CustomStringConvertible>(url: URL, method: HTTPMethod, parameters: [String: Any], options: [Option], completion: @escaping (Result<JSONType, Error>) -> Void) -> CancellableRequest
 }
 
 public protocol CancellableRequest {
     func cancel()
+}
+
+public extension Networker {
+    @discardableResult
+    func requestData<HTTPMethod: CustomStringConvertible>(url: URL, method: HTTPMethod, parameters: [String: Any], options: [Option], completion: @escaping (Result<Data, Error>) -> Void) -> CancellableRequest {
+        return requestData(request: buildRequest(url: url, method: method, parameters: parameters, options: options), completion: completion)
+    }
+    @discardableResult
+    func requestJSON<HTTPMethod: CustomStringConvertible>(url: URL, method: HTTPMethod, parameters: [String: Any], options: [Option], completion: @escaping (Result<JSONType, Error>) -> Void) -> CancellableRequest {
+        return requestJSON(request: buildRequest(url: url, method: method, parameters: parameters, options: options), completion: completion)
+    }
 }
