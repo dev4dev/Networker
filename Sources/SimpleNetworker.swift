@@ -10,6 +10,19 @@ import Foundation
 import Alamofire
 import RxSwift
 
+public struct NetworkerResponse<ResponseType> {
+    public let response: HTTPURLResponse
+    public let value: ResponseType
+    
+    public func update<NewType>(data: NewType) -> NetworkerResponse<NewType> {
+        return NetworkerResponse<NewType>(response: response, value: data)
+    }
+    
+    func validate() -> Bool {
+        return (200..<300).contains(response.statusCode)
+    }
+}
+
 public final class SimpleNetworker {
     
     private let config: NetworkConfiguration
@@ -53,13 +66,13 @@ public final class SimpleNetworker {
     }
     
     @discardableResult
-    public func requestData(url: URL, method: HTTPMethod, parameters: [String: Any] = [:], options: [Option] = []) -> Single<Data> {
+    public func requestData(url: URL, method: HTTPMethod, parameters: [String: Any] = [:], options: [Option] = []) -> Single<NetworkerResponse<Data>> {
         return Single.create { s in
             let request = self.request(url: url, method: method, parameters: parameters, options: options)
             request.responseData { response in
                 switch response.result {
                 case .success(let data):
-                    s(.success(data))
+                    s(.success(NetworkerResponse(response: response.response!, value: data)))
                 case .failure(let error):
                     s(.error(error))
                 }
@@ -73,13 +86,13 @@ public final class SimpleNetworker {
     }
     
     @discardableResult
-    public func requestData(request: URLRequest) -> Single<Data> {
+    public func requestData(request: URLRequest) -> Single<NetworkerResponse<Data>> {
         return Single.create { s in
             let request = self.session.request(request)
             request.responseData { response in
                 switch response.result {
                 case .success(let data):
-                    s(.success(data))
+                    s(.success(NetworkerResponse(response: response.response!, value: data)))
                 case .failure(let error):
                     s(.error(error))
                 }
@@ -92,10 +105,10 @@ public final class SimpleNetworker {
     }
 }
 
-public extension PrimitiveSequenceType where Trait == SingleTrait, Element == Data {
-    func toModel<ObjectType: Decodable>() -> PrimitiveSequence<Trait, ObjectType> {
-        return self.map { data in
-            return try data.toModel() as ObjectType
+public extension PrimitiveSequenceType where Trait == SingleTrait, Element == NetworkerResponse<Data> {
+    func toModel<ObjectType: Decodable>() -> PrimitiveSequence<Trait, NetworkerResponse<ObjectType>> {
+        return map { data -> NetworkerResponse<ObjectType> in
+            return data.update(data: try data.value.toModel() as ObjectType)
         }
     }
 }
