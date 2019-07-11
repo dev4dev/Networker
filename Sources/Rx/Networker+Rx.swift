@@ -56,11 +56,7 @@ public extension Observable where Element == Data {
     
     func toModel<ObjectType: Decodable>() -> Observable<ObjectType> {
         return map { data -> ObjectType in
-            if let model = data.toModel() as ObjectType? {
-                return model
-            } else {
-                throw "Error during object mapping"
-            }
+            return try data.toModel() as ObjectType
         }
     }
 }

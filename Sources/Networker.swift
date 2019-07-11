@@ -142,7 +142,7 @@ public final class Networker {
                 if let json = data as? JSONType {
                     completion(.success(json))
                 } else {
-                    completion(.failure("JSON incopatible type"))
+                    completion(.failure("JSON incompatible type"))
                 }
             case .failure(let error):
                 completion(.failure(error))

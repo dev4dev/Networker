@@ -22,6 +22,7 @@
 		632CE6D422D745D8009E172D /* Networker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 632CE6D322D745D8009E172D /* Networker.swift */; };
 		632CE6D622D7487F009E172D /* Networker+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 632CE6D522D7487F009E172D /* Networker+Rx.swift */; };
 		63D52A5B22D759710089185A /* Codable+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D52A5922D753D40089185A /* Codable+Additions.swift */; };
+		63D52A5D22D7644F0089185A /* SimpleNetworker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D52A5C22D7644F0089185A /* SimpleNetworker.swift */; };
 		C65FD23C52758778DAF404B9 /* Pods_Demo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88936EF9FAC51A732CFC2CF7 /* Pods_Demo.framework */; };
 /* End PBXBuildFile section */
 
@@ -56,6 +57,7 @@
 		632CE6D322D745D8009E172D /* Networker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networker.swift; sourceTree = "<group>"; };
 		632CE6D522D7487F009E172D /* Networker+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Networker+Rx.swift"; sourceTree = "<group>"; };
 		63D52A5922D753D40089185A /* Codable+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Codable+Additions.swift"; sourceTree = "<group>"; };
+		63D52A5C22D7644F0089185A /* SimpleNetworker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleNetworker.swift; sourceTree = "<group>"; };
 		71499F8127E0EFDF2457CEC6 /* Pods-Networker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Networker.release.xcconfig"; path = "Target Support Files/Pods-Networker/Pods-Networker.release.xcconfig"; sourceTree = "<group>"; };
 		88936EF9FAC51A732CFC2CF7 /* Pods_Demo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Demo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D64ED77C21047375EB103E28 /* Pods-Networker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Networker.debug.xcconfig"; path = "Target Support Files/Pods-Networker/Pods-Networker.debug.xcconfig"; sourceTree = "<group>"; };
@@ -122,6 +124,7 @@
 				6305D68D22CF772B0055DCD2 /* Result+Additions.swift */,
 				632CE6D322D745D8009E172D /* Networker.swift */,
 				63D52A5922D753D40089185A /* Codable+Additions.swift */,
+				63D52A5C22D7644F0089185A /* SimpleNetworker.swift */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -351,6 +354,7 @@
 				632CE6D422D745D8009E172D /* Networker.swift in Sources */,
 				6305D68E22CF772B0055DCD2 /* Result+Additions.swift in Sources */,
 				6305D66E22CF69060055DCD2 /* AlamofireNetworker.swift in Sources */,
+				63D52A5D22D7644F0089185A /* SimpleNetworker.swift in Sources */,
 				632CE6D622D7487F009E172D /* Networker+Rx.swift in Sources */,
 				6305D66B22CF3C8C0055DCD2 /* NetworkerType.swift in Sources */,
 				6305D69522CF8D770055DCD2 /* NetworkerType+Rx.swift in Sources */,

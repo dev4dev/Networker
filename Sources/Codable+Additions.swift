@@ -12,6 +12,10 @@ public extension Data {
     func toModel<ObjectType: Decodable>() -> ObjectType? {
         return try? JSONDecoder().decode(ObjectType.self, from: self)
     }
+    
+    func toModel<ObjectType: Decodable>() throws -> ObjectType {
+        return try JSONDecoder().decode(ObjectType.self, from: self)
+    }
 }
 
 public extension Encodable {

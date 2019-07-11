@@ -24,6 +24,7 @@ class ViewController: UIViewController {
 //    let network: NetworkerType = AlamofireNetworker(config: NetworkConfiguration())
 //    let alamo = AlamofireNetworker(config: NetworkConfiguration())
     let networker = Networker(config: NetworkConfiguration())
+    let simple = SimpleNetworker(config: NetworkConfiguration())
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -63,10 +64,14 @@ class ViewController: UIViewController {
 //        }.disposed(by: trash)
         
         networker.requestData(url: url, method: .get).asObservable().toModel().subscribe(onNext: { (model: Model) in
-            print(model)
+            print("1", model)
             print(model.toJSONData()?.toJSON())
         }, onError: { error in
             print(error)
+        }).disposed(by: trash)
+        
+        simple.requestData(url: url, method: .get).toModel().subscribe(onSuccess: { (model: Model) in
+            print("2", model)
         }).disposed(by: trash)
     }
 
