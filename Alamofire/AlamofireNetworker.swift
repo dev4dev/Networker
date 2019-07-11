@@ -39,7 +39,7 @@ final class DefaultRetrier: RequestRetrier {
     }
 }
 
-public final class AlamofireNetworker: Networker {
+public final class AlamofireNetworker: NetworkerType {
     
     public typealias ParametersType = Parameters
     public typealias ErrorType = Error

@@ -21,7 +21,7 @@ class ViewController: UIViewController {
     
     private let trash = DisposeBag()
     
-    let network: Networker = AlamofireNetworker(config: NetworkConfiguration())
+    let network: NetworkerType = AlamofireNetworker(config: NetworkConfiguration())
     let alamo = AlamofireNetworker(config: NetworkConfiguration())
 
     override func viewDidLoad() {

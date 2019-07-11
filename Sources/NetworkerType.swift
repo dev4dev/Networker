@@ -36,7 +36,7 @@ public struct NetworkConfiguration {
     }
 }
 
-public protocol Networker {
+public protocol NetworkerType {
     init(config: NetworkConfiguration)
     func buildRequest<HTTPMethod: CustomStringConvertible>(url: URL, method: HTTPMethod, parameters: [String: Any], options: [Option]) -> URLRequest
     @discardableResult
@@ -53,7 +53,7 @@ public protocol CancellableRequest {
     func cancel()
 }
 
-public extension Networker {
+public extension NetworkerType {
     @discardableResult
     func requestData<HTTPMethod: CustomStringConvertible>(url: URL, method: HTTPMethod, parameters: [String: Any], options: [Option], completion: @escaping (Result<Data, Error>) -> Void) -> CancellableRequest {
         return requestData(request: buildRequest(url: url, method: method, parameters: parameters, options: options), completion: completion)

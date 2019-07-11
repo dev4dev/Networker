@@ -9,7 +9,7 @@
 import Foundation
 import RxSwift
 
-public extension Reactive where Base: Networker {
+public extension Reactive where Base: NetworkerType {
     func requestData(request: URLRequest) -> Single<Data> {
         return Single.create { single in
             let request = self.base.requestData(request: request, completion: { result in
@@ -53,7 +53,7 @@ public extension Reactive where Base: Networker {
     }
 }
 
-public extension Networker {
+public extension NetworkerType {
     func rx_requestData(request: URLRequest) -> Single<Data> {
         return Single.create { single in
             let request = self.requestData(request: request, completion: { result in
