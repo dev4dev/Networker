@@ -27,6 +27,10 @@ public extension PrimitiveSequenceType where Trait == SingleTrait, Element == Ne
             return data.update(data: String(bytes: data.value, encoding: .utf8) ?? "")
         }
     }
+    
+    func toVoid() -> PrimitiveSequence<Trait, Void> {
+        return map { _ in Void() }
+    }
 }
 
 public extension PrimitiveSequenceType where Trait == SingleTrait {
