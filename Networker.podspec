@@ -58,7 +58,7 @@ Pod::Spec.new do |spec|
   spec.dependency 'RxSwift'
   
   spec.subspec 'ObjectMapper' do |ss|
-    ss.source_files 'ObjectMapper'
+    ss.source_files = 'ObjectMapper'
     ss.dependency 'ObjectMapper'
   end
 
