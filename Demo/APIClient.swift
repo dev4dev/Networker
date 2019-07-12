@@ -12,8 +12,8 @@ import RxSwift
 
 final class APIClient {
     
-    let network: SimpleNetworker
-    init(network: SimpleNetworker) {
+    let network: Networker
+    init(network: Networker) {
         self.network = network
     }
     

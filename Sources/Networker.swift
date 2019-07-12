@@ -10,7 +10,7 @@ import Foundation
 import Alamofire
 import RxSwift
 
-public final class SimpleNetworker {
+public final class Networker {
     
     private let config: NetworkConfiguration
     private let session: SessionManager
