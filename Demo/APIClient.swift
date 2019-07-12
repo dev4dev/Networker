@@ -18,7 +18,7 @@ final class APIClient {
     }
     
     func bitcoinData() -> Single<Model> {
-        return network.requestData(url: URL(string: "https://api.cryptonator.com/api/ticker/btc-usd")!, method: .get).toModel().map { $0.value }
+        return network.requestData(url: URL(string: "https://api.cryptonator.com/api/ticker/btc-usd")!, method: .get).toCodableModel().map { $0.value }
     }
     
 }

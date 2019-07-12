@@ -10,13 +10,13 @@ import Foundation
 import RxSwift
 
 public extension PrimitiveSequenceType where Trait == SingleTrait, Element == NetworkerResponse<Data> {
-    func toModel<ObjectType: Decodable>() -> PrimitiveSequence<Trait, NetworkerResponse<ObjectType>> {
+    func toCodableModel<ObjectType: Decodable>() -> PrimitiveSequence<Trait, NetworkerResponse<ObjectType>> {
         return map { data -> NetworkerResponse<ObjectType> in
             return data.update(data: try data.value.toModel() as ObjectType)
         }
     }
     
-    func toModelsArray<ObjectType: Decodable>() -> PrimitiveSequence<Trait, NetworkerResponse<[ObjectType]>> {
+    func toCodableModelsArray<ObjectType: Decodable>() -> PrimitiveSequence<Trait, NetworkerResponse<[ObjectType]>> {
         return map { data -> NetworkerResponse<[ObjectType]> in
             return data.update(data: try data.value.toModelsArray() as [ObjectType])
         }

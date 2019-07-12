@@ -11,17 +11,17 @@ import RxSwift
 import ObjectMapper
 
 public extension PrimitiveSequenceType where Trait == SingleTrait, Element == NetworkerResponse<Data> {
-    func toModel<ObjectType: BaseMappable>(key: String? = nil) -> PrimitiveSequence<Trait, NetworkerResponse<ObjectType>> {
-        return toString().toModel(key: key)
+    func toMappableModel<ObjectType: BaseMappable>(key: String? = nil) -> PrimitiveSequence<Trait, NetworkerResponse<ObjectType>> {
+        return toString().toMappableModel(key: key)
     }
     
-    func toModelsArray<ObjectType: BaseMappable>(key: String) -> PrimitiveSequence<Trait, NetworkerResponse<[ObjectType]>> {
-        return toString().toModelsArray(key: key)
+    func toMappableModelsArray<ObjectType: BaseMappable>(key: String) -> PrimitiveSequence<Trait, NetworkerResponse<[ObjectType]>> {
+        return toString().toMappableModelsArray(key: key)
     }
 }
 
 public extension PrimitiveSequenceType where Trait == SingleTrait, Element == NetworkerResponse<String> {
-    func toModel<ObjectType: BaseMappable>(key: String? = nil) -> PrimitiveSequence<Trait, NetworkerResponse<ObjectType>> {
+    func toMappableModel<ObjectType: BaseMappable>(key: String? = nil) -> PrimitiveSequence<Trait, NetworkerResponse<ObjectType>> {
         return map { data -> NetworkerResponse<ObjectType> in
             if let key = key, let dict = data.value.toJSONDict(), let json = dict[key] as? [String: Any] {
                 if let model = Mapper<ObjectType>().map(JSON: json) {
@@ -39,7 +39,7 @@ public extension PrimitiveSequenceType where Trait == SingleTrait, Element == Ne
         }
     }
     
-    func toModelsArray<ObjectType: BaseMappable>(key: String) -> PrimitiveSequence<Trait, NetworkerResponse<[ObjectType]>> {
+    func toMappableModelsArray<ObjectType: BaseMappable>(key: String) -> PrimitiveSequence<Trait, NetworkerResponse<[ObjectType]>> {
         return map { data -> NetworkerResponse<[ObjectType]> in
             if let dict = data.value.toJSONDict(), let arr = dict[key] as? [[String: Any]] {
                 let models = arr.compactMap { Mapper<ObjectType>().map(JSON: $0) }
