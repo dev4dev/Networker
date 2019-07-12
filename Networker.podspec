@@ -52,13 +52,14 @@ Pod::Spec.new do |spec|
   #  Not including the public_header_files will make all headers public.
   #
 
-  spec.source_files  = "Sources"
+  spec.source_files  = "Sources/**/*.swift"
+  spec.public_header_files = "Sources/**/*.h"
   
   spec.dependency 'Alamofire'
   spec.dependency 'RxSwift'
   
   spec.subspec 'ObjectMapper' do |ss|
-    ss.source_files = 'ObjectMapper'
+    ss.source_files = 'ObjectMapper/**/*.swift'
     ss.dependency 'ObjectMapper'
   end
 
