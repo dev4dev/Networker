@@ -13,8 +13,6 @@ public enum Encoding {
     case URL
 }
 
-public typealias JSONType = [AnyHashable: Any]
-
 public enum Option {
     case headers([String: String])
     case encoding(Encoding)
@@ -47,6 +45,8 @@ public enum HTTPMethod: String {
     case trace   = "TRACE"
     case connect = "CONNECT"
 }
+
+public typealias Parameters = [String: Any]
 
 public struct NetworkerResponse<ResponseType> {
     public let response: HTTPURLResponse
