@@ -54,14 +54,7 @@ Pod::Spec.new do |spec|
 
   spec.source_files  = "Sources"
   
-  spec.subspec 'Alamofire' do |ss|
-    ss.dependency 'Alamofire'
-    ss.source_files = 'Alamofire/*.swift'
-  end
-  
-  spec.subspec 'Rx' do |ss|
-    ss.dependency 'RxSwift'
-    ss.source_files = 'Sources/Rx/*.swift'
-  end
+  spec.dependency 'Alamofire'
+  spec.dependency 'RxSwift'
 
 end
