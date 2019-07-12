@@ -56,7 +56,7 @@ public struct NetworkerResponse<ResponseType> {
         return NetworkerResponse<NewType>(response: response, value: data)
     }
     
-    func validate() -> Bool {
+    public func validate() -> Bool {
         return (200..<300).contains(response.statusCode)
     }
 }
