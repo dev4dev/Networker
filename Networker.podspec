@@ -56,5 +56,10 @@ Pod::Spec.new do |spec|
   
   spec.dependency 'Alamofire'
   spec.dependency 'RxSwift'
+  
+  subspec 'ObjectMapper' do |ss|
+    ss.source_files 'ObjectMapper'
+    ss.dependency 'ObjectMapper'
+  end
 
 end

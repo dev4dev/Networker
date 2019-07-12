@@ -33,6 +33,14 @@ class ViewController: UIViewController {
             print("🍀", model)
         }).disposed(by: trash)
         
+        networker.requestData(url: url, method: .get).toString().toModel().subscribe(onSuccess: { (model: NetworkerResponse<MappableModel>) in
+            print("🦠", model)
+        }).disposed(by: trash)
+        
+        networker.requestData(url: url, method: .get).toString().toModel(key: "ticker").subscribe(onSuccess: { (model: NetworkerResponse<MappableSubModel>) in
+            print("🔥", model)
+        }).disposed(by: trash)
+        
         api.bitcoinData().map { $0.price }.asDriver(onErrorJustReturn: "0.0").drive(output.rx.text).disposed(by: trash)
     }
 

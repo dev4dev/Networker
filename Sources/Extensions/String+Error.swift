@@ -17,3 +17,14 @@ extension String: LocalizedError {
         return self
     }
 }
+
+extension String {
+    func toJSONDict() -> [String: Any]? {
+        let data = try? JSONSerialization.jsonObject(with: self.data(using: String.Encoding.utf8)!, options: [.allowFragments])
+        if let data = data as? [String: Any] {
+            return data
+        }
+        
+        return nil
+    }
+}
