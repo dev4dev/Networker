@@ -10,6 +10,16 @@ import Foundation
 import RxSwift
 import ObjectMapper
 
+public extension PrimitiveSequenceType where Trait == SingleTrait, Element == NetworkerResponse<Data> {
+    func toModel<ObjectType: BaseMappable>(key: String? = nil) -> PrimitiveSequence<Trait, NetworkerResponse<ObjectType>> {
+        return toString().toModel(key: key)
+    }
+    
+    func toModelsArray<ObjectType: BaseMappable>(key: String) -> PrimitiveSequence<Trait, NetworkerResponse<[ObjectType]>> {
+        return toString().toModelsArray(key: key)
+    }
+}
+
 public extension PrimitiveSequenceType where Trait == SingleTrait, Element == NetworkerResponse<String> {
     func toModel<ObjectType: BaseMappable>(key: String? = nil) -> PrimitiveSequence<Trait, NetworkerResponse<ObjectType>> {
         return map { data -> NetworkerResponse<ObjectType> in

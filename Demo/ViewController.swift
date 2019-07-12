@@ -33,11 +33,11 @@ class ViewController: UIViewController {
             print("🍀", model)
         }).disposed(by: trash)
         
-        networker.requestData(url: url, method: .get).toString().toModel().subscribe(onSuccess: { (model: NetworkerResponse<MappableModel>) in
+        networker.requestData(url: url, method: .get).toModel().subscribe(onSuccess: { (model: NetworkerResponse<MappableModel>) in
             print("🦠", model)
         }).disposed(by: trash)
         
-        networker.requestData(url: url, method: .get).toString().toModel(key: "ticker").subscribe(onSuccess: { (model: NetworkerResponse<MappableSubModel>) in
+        networker.requestData(url: url, method: .get).toModel(key: "ticker").subscribe(onSuccess: { (model: NetworkerResponse<MappableSubModel>) in
             print("🔥", model)
         }).disposed(by: trash)
         
