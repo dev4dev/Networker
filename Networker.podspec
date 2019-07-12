@@ -59,6 +59,7 @@ Pod::Spec.new do |spec|
   
   spec.subspec 'ObjectMapper' do |ss|
     ss.source_files = 'ObjectMapper'
+    ss.dependency 'Networker'
     ss.dependency 'ObjectMapper'
   end
 
