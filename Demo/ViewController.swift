@@ -24,7 +24,7 @@ class ViewController: UIViewController {
     
 //    let network: NetworkerType = AlamofireNetworker(config: NetworkConfiguration())
 //    let alamo = AlamofireNetworker(config: NetworkConfiguration())
-    let networker = Networker(config: NetworkConfiguration())
+//    let networker = Networker(config: NetworkConfiguration())
     let simple = SimpleNetworker(config: NetworkConfiguration())
 
     override func viewDidLoad() {

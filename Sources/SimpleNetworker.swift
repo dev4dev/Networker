@@ -10,19 +10,6 @@ import Foundation
 import Alamofire
 import RxSwift
 
-public struct NetworkerResponse<ResponseType> {
-    public let response: HTTPURLResponse
-    public let value: ResponseType
-    
-    public func update<NewType>(data: NewType) -> NetworkerResponse<NewType> {
-        return NetworkerResponse<NewType>(response: response, value: data)
-    }
-    
-    func validate() -> Bool {
-        return (200..<300).contains(response.statusCode)
-    }
-}
-
 public final class SimpleNetworker {
     
     private let config: NetworkConfiguration
@@ -105,10 +92,28 @@ public final class SimpleNetworker {
     }
 }
 
-public extension PrimitiveSequenceType where Trait == SingleTrait, Element == NetworkerResponse<Data> {
-    func toModel<ObjectType: Decodable>() -> PrimitiveSequence<Trait, NetworkerResponse<ObjectType>> {
-        return map { data -> NetworkerResponse<ObjectType> in
-            return data.update(data: try data.value.toModel() as ObjectType)
+extension HTTPMethod {
+    func toAlamofire() -> Alamofire.HTTPMethod {
+        switch self {
+        case .options:
+            return Alamofire.HTTPMethod.options
+        case .get:
+            return Alamofire.HTTPMethod.get
+        case .head:
+            return Alamofire.HTTPMethod.head
+        case .post:
+            return Alamofire.HTTPMethod.post
+        case .put:
+            return Alamofire.HTTPMethod.put
+        case .patch:
+            return Alamofire.HTTPMethod.patch
+        case .delete:
+            return Alamofire.HTTPMethod.delete
+        case .trace:
+            return Alamofire.HTTPMethod.trace
+        case .connect:
+            return Alamofire.HTTPMethod.connect
         }
     }
 }
+

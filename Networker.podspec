@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |spec|
   spec.name         = "Networker"
-  spec.version      = "0.0.1"
+  spec.version      = "0.0.2"
   spec.summary      = "Network layer abstraction"
   spec.description  = <<-DESC
     Network layer to use for internal SDKs
@@ -52,7 +52,7 @@ Pod::Spec.new do |spec|
   #  Not including the public_header_files will make all headers public.
   #
 
-  spec.source_files  = "Sources/*.swift"
+  spec.source_files  = "Sources"
   
   spec.subspec 'Alamofire' do |ss|
     ss.dependency 'Alamofire'

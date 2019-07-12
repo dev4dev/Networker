@@ -9,8 +9,6 @@
 /* Begin PBXBuildFile section */
 		439E0E8BDE76AFF309324550 /* Pods_Networker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7F2EB2CEDB5E4F281AFCFAE /* Pods_Networker.framework */; };
 		6305D66422CF3C7D0055DCD2 /* Networker.h in Headers */ = {isa = PBXBuildFile; fileRef = 6305D66222CF3C7D0055DCD2 /* Networker.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		6305D66B22CF3C8C0055DCD2 /* NetworkerType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6305D66A22CF3C8C0055DCD2 /* NetworkerType.swift */; };
-		6305D66E22CF69060055DCD2 /* AlamofireNetworker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6305D66D22CF69060055DCD2 /* AlamofireNetworker.swift */; };
 		6305D67622CF751D0055DCD2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6305D67522CF751D0055DCD2 /* AppDelegate.swift */; };
 		6305D67822CF751D0055DCD2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6305D67722CF751D0055DCD2 /* ViewController.swift */; };
 		6305D67B22CF751D0055DCD2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6305D67922CF751D0055DCD2 /* Main.storyboard */; };
@@ -18,9 +16,10 @@
 		6305D68022CF751F0055DCD2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6305D67E22CF751F0055DCD2 /* LaunchScreen.storyboard */; };
 		6305D68E22CF772B0055DCD2 /* Result+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6305D68D22CF772B0055DCD2 /* Result+Additions.swift */; };
 		6305D69222CF82CC0055DCD2 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6305D69122CF82CC0055DCD2 /* Model.swift */; };
-		6305D69522CF8D770055DCD2 /* NetworkerType+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6305D69422CF8D770055DCD2 /* NetworkerType+Rx.swift */; };
-		632CE6D422D745D8009E172D /* Networker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 632CE6D322D745D8009E172D /* Networker.swift */; };
-		632CE6D622D7487F009E172D /* Networker+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 632CE6D522D7487F009E172D /* Networker+Rx.swift */; };
+		63BC909D22D878BE001E7EAB /* Types.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63BC909C22D878BE001E7EAB /* Types.swift */; };
+		63BC90A122D8794A001E7EAB /* DefaultRetrier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63BC90A022D8794A001E7EAB /* DefaultRetrier.swift */; };
+		63BC90A322D879C1001E7EAB /* Rx+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63BC90A222D879C1001E7EAB /* Rx+Additions.swift */; };
+		63BC90A622D879FB001E7EAB /* String+Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63BC90A522D879FB001E7EAB /* String+Error.swift */; };
 		63D52A5B22D759710089185A /* Codable+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D52A5922D753D40089185A /* Codable+Additions.swift */; };
 		63D52A5D22D7644F0089185A /* SimpleNetworker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D52A5C22D7644F0089185A /* SimpleNetworker.swift */; };
 		63D52A5F22D76B950089185A /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D52A5E22D76B950089185A /* APIClient.swift */; };
@@ -43,8 +42,6 @@
 		6305D65F22CF3C7D0055DCD2 /* Networker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Networker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6305D66222CF3C7D0055DCD2 /* Networker.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Networker.h; sourceTree = "<group>"; };
 		6305D66322CF3C7D0055DCD2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		6305D66A22CF3C8C0055DCD2 /* NetworkerType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkerType.swift; sourceTree = "<group>"; };
-		6305D66D22CF69060055DCD2 /* AlamofireNetworker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlamofireNetworker.swift; sourceTree = "<group>"; };
 		6305D67322CF751D0055DCD2 /* Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Demo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6305D67522CF751D0055DCD2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6305D67722CF751D0055DCD2 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -54,9 +51,10 @@
 		6305D68122CF751F0055DCD2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6305D68D22CF772B0055DCD2 /* Result+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Result+Additions.swift"; sourceTree = "<group>"; };
 		6305D69122CF82CC0055DCD2 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
-		6305D69422CF8D770055DCD2 /* NetworkerType+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NetworkerType+Rx.swift"; sourceTree = "<group>"; };
-		632CE6D322D745D8009E172D /* Networker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networker.swift; sourceTree = "<group>"; };
-		632CE6D522D7487F009E172D /* Networker+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Networker+Rx.swift"; sourceTree = "<group>"; };
+		63BC909C22D878BE001E7EAB /* Types.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Types.swift; sourceTree = "<group>"; };
+		63BC90A022D8794A001E7EAB /* DefaultRetrier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultRetrier.swift; sourceTree = "<group>"; };
+		63BC90A222D879C1001E7EAB /* Rx+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Rx+Additions.swift"; sourceTree = "<group>"; };
+		63BC90A522D879FB001E7EAB /* String+Error.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Error.swift"; sourceTree = "<group>"; };
 		63D52A5922D753D40089185A /* Codable+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Codable+Additions.swift"; sourceTree = "<group>"; };
 		63D52A5C22D7644F0089185A /* SimpleNetworker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleNetworker.swift; sourceTree = "<group>"; };
 		63D52A5E22D76B950089185A /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
@@ -98,7 +96,6 @@
 		6305D65522CF3C7D0055DCD2 = {
 			isa = PBXGroup;
 			children = (
-				6305D66C22CF68F70055DCD2 /* Alamofire */,
 				6305D66122CF3C7D0055DCD2 /* Sources */,
 				6305D67422CF751D0055DCD2 /* Demo */,
 				6305D66022CF3C7D0055DCD2 /* Products */,
@@ -119,24 +116,13 @@
 		6305D66122CF3C7D0055DCD2 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				6305D69322CF8D5F0055DCD2 /* Rx */,
-				6305D66222CF3C7D0055DCD2 /* Networker.h */,
-				6305D66322CF3C7D0055DCD2 /* Info.plist */,
-				6305D66A22CF3C8C0055DCD2 /* NetworkerType.swift */,
-				6305D68D22CF772B0055DCD2 /* Result+Additions.swift */,
-				632CE6D322D745D8009E172D /* Networker.swift */,
-				63D52A5922D753D40089185A /* Codable+Additions.swift */,
+				63BC90A722D87A24001E7EAB /* System */,
+				63BC90A422D879ED001E7EAB /* Extensions */,
+				63BC909C22D878BE001E7EAB /* Types.swift */,
 				63D52A5C22D7644F0089185A /* SimpleNetworker.swift */,
+				63BC90A022D8794A001E7EAB /* DefaultRetrier.swift */,
 			);
 			path = Sources;
-			sourceTree = "<group>";
-		};
-		6305D66C22CF68F70055DCD2 /* Alamofire */ = {
-			isa = PBXGroup;
-			children = (
-				6305D66D22CF69060055DCD2 /* AlamofireNetworker.swift */,
-			);
-			path = Alamofire;
 			sourceTree = "<group>";
 		};
 		6305D67422CF751D0055DCD2 /* Demo */ = {
@@ -154,13 +140,24 @@
 			path = Demo;
 			sourceTree = "<group>";
 		};
-		6305D69322CF8D5F0055DCD2 /* Rx */ = {
+		63BC90A422D879ED001E7EAB /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				6305D69422CF8D770055DCD2 /* NetworkerType+Rx.swift */,
-				632CE6D522D7487F009E172D /* Networker+Rx.swift */,
+				6305D68D22CF772B0055DCD2 /* Result+Additions.swift */,
+				63D52A5922D753D40089185A /* Codable+Additions.swift */,
+				63BC90A222D879C1001E7EAB /* Rx+Additions.swift */,
+				63BC90A522D879FB001E7EAB /* String+Error.swift */,
 			);
-			path = Rx;
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		63BC90A722D87A24001E7EAB /* System */ = {
+			isa = PBXGroup;
+			children = (
+				6305D66222CF3C7D0055DCD2 /* Networker.h */,
+				6305D66322CF3C7D0055DCD2 /* Info.plist */,
+			);
+			path = System;
 			sourceTree = "<group>";
 		};
 		BCF8130AB713EBA8206B0F2C /* Pods */ = {
@@ -354,13 +351,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				632CE6D422D745D8009E172D /* Networker.swift in Sources */,
+				63BC90A622D879FB001E7EAB /* String+Error.swift in Sources */,
 				6305D68E22CF772B0055DCD2 /* Result+Additions.swift in Sources */,
-				6305D66E22CF69060055DCD2 /* AlamofireNetworker.swift in Sources */,
 				63D52A5D22D7644F0089185A /* SimpleNetworker.swift in Sources */,
-				632CE6D622D7487F009E172D /* Networker+Rx.swift in Sources */,
-				6305D66B22CF3C8C0055DCD2 /* NetworkerType.swift in Sources */,
-				6305D69522CF8D770055DCD2 /* NetworkerType+Rx.swift in Sources */,
+				63BC909D22D878BE001E7EAB /* Types.swift in Sources */,
+				63BC90A322D879C1001E7EAB /* Rx+Additions.swift in Sources */,
+				63BC90A122D8794A001E7EAB /* DefaultRetrier.swift in Sources */,
 				63D52A5B22D759710089185A /* Codable+Additions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -539,7 +535,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "$(SRCROOT)/Sources/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Sources/System/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -566,7 +562,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "$(SRCROOT)/Sources/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Sources/System/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
