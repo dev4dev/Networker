@@ -33,14 +33,10 @@ public extension PrimitiveSequenceType where Trait == SingleTrait, Element == Ne
     }
 }
 
-public extension PrimitiveSequenceType where Trait == SingleTrait {
-    func toValue<ModelType>() -> PrimitiveSequence<Trait, ModelType> {
+public extension PrimitiveSequenceType where Trait == SingleTrait, Element: ValueContainer {
+    func toValue() -> PrimitiveSequence<Trait, Element.ValueType> {
         return map { data in
-            if let model = data as? NetworkerResponse<ModelType> {
-                return model.value
-            } else {
-                throw "Error during value extraction"
-            }
+            return data.value
         }
     }
 }

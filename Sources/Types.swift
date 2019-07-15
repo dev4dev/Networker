@@ -48,7 +48,14 @@ public enum HTTPMethod: String {
 
 public typealias Parameters = [String: Any]
 
-public struct NetworkerResponse<ResponseType> {
+public protocol ValueContainer {
+    associatedtype ValueType
+    
+    var value: ValueType { get }
+}
+
+public struct NetworkerResponse<ResponseType>: ValueContainer {
+    public typealias ValueType = ResponseType
     public let response: HTTPURLResponse
     public let value: ResponseType
     
