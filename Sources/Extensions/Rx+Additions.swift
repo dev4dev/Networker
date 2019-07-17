@@ -34,7 +34,9 @@ public extension PrimitiveSequenceType where Trait == SingleTrait, Element == Ne
             return data.update(data: (data.value.toJSON() as? Parameters) ?? [:])
         }
     }
-    
+}
+
+public extension PrimitiveSequenceType where Trait == SingleTrait {
     func toVoid() -> PrimitiveSequence<Trait, Void> {
         return map { _ in Void() }
     }
