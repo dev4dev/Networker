@@ -12,9 +12,10 @@ public enum Encoding {
     case JSON
     case URL
 }
+public typealias HTTPHeaders = [String: String]
 
 public enum Option {
-    case headers([String: String])
+    case headers(HTTPHeaders)
     case encoding(Encoding)
 }
 
