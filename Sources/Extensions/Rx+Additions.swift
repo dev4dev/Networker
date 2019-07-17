@@ -11,15 +11,35 @@ import RxSwift
 import ObjectMapper
 
 public extension PrimitiveSequenceType where Trait == SingleTrait, Element == NetworkerResponse<Data> {
-    func toCodableModel<ObjectType: Decodable>() -> PrimitiveSequence<Trait, NetworkerResponse<ObjectType>> {
+    func toCodableModel<ObjectType: Decodable>(key: String? = nil) -> PrimitiveSequence<Trait, NetworkerResponse<ObjectType>> {
         return map { data -> NetworkerResponse<ObjectType> in
-            return data.update(data: try data.value.toModel() as ObjectType)
+            if let key = key {
+                let json = try data.value.attempToJSON() as? Parameters ?? [:]
+                if let dict = json[key] {
+                    let objJSON = try JSONSerialization.data(withJSONObject: dict)
+                    return data.update(data: try objJSON.toModel() as ObjectType)
+                } else {
+                    throw "Mapping to \(ObjectType.self) failed"
+                }
+            } else {
+                return data.update(data: try data.value.toModel() as ObjectType)
+            }
         }
     }
     
-    func toCodableModelsArray<ObjectType: Decodable>() -> PrimitiveSequence<Trait, NetworkerResponse<[ObjectType]>> {
+    func toCodableModelsArray<ObjectType: Decodable>(key: String? = nil) -> PrimitiveSequence<Trait, NetworkerResponse<[ObjectType]>> {
         return map { data -> NetworkerResponse<[ObjectType]> in
-            return data.update(data: try data.value.toModelsArray() as [ObjectType])
+            if let key = key {
+                let json = try data.value.attempToJSON() as? Parameters ?? [:]
+                if let dict = json[key] {
+                    let objJSON = try JSONSerialization.data(withJSONObject: dict)
+                    return data.update(data: try objJSON.toModel() as [ObjectType])
+                } else {
+                    throw "Mapping to \(ObjectType.self) failed"
+                }
+            } else {
+                return data.update(data: try data.value.toModel() as [ObjectType])
+            }
         }
     }
     
