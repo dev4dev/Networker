@@ -26,10 +26,18 @@ public extension Encodable {
     func toJSONData() -> Data? {
         return try? JSONEncoder().encode(self)
     }
+    
+    func attempToJSONData() throws -> Data {
+        return try JSONEncoder().encode(self)
+    }
 }
 
 public extension Data {
     func toJSON() -> Any? {
         return try? JSONSerialization.jsonObject(with: self, options: [])
+    }
+    
+    func attempToJSON() throws -> Any {
+        return try JSONSerialization.jsonObject(with: self, options: [])
     }
 }
