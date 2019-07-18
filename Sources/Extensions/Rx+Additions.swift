@@ -74,6 +74,17 @@ public extension PrimitiveSequenceType where Trait == SingleTrait, Element == Ne
             return data.update(data: (data.value.toJSON() as? [JSONDict]) ?? [])
         }
     }
+    
+    func toJSONValue<Type>(key: String) -> PrimitiveSequence<Trait, Type> {
+        return map { data -> Type in
+            let jsonDict = (data.value.toJSON() as? JSONDict) ?? [:]
+            if let value = jsonDict[keyPath: KeyPath(key)] as? Type {
+                return value
+            } else {
+                throw "Value at key \(key) not found"
+            }
+        }
+    }
 }
 
 public extension PrimitiveSequenceType where Trait == SingleTrait {
