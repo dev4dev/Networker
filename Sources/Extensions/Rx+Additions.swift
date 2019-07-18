@@ -75,13 +75,21 @@ public extension PrimitiveSequenceType where Trait == SingleTrait, Element == Ne
         }
     }
     
-    func toJSONValue<Type>(key: String) -> PrimitiveSequence<Trait, Type> {
+    /// Converts to a simple value under the provided key
+    ///
+    /// - Parameters:
+    ///   - key: Key to look up at
+    ///   - default: Default value
+    /// - Parameter key: Key to look up at
+    /// - Returns: Value
+    func toJSONValue<Type>(key: String, default: Type? = nil) -> PrimitiveSequence<Trait, Type> {
         return map { data -> Type in
             let jsonDict = (data.value.toJSON() as? JSONDict) ?? [:]
-            if let value = jsonDict[keyPath: KeyPath(key)] as? Type {
+            let value = (jsonDict[keyPath: KeyPath(key)] as? Type) ?? `default`
+            if let value = value {
                 return value
             } else {
-                throw "Value at key \(key) not found"
+                throw "Miising value at key \(key)"
             }
         }
     }
