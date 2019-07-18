@@ -106,7 +106,7 @@ public extension PrimitiveSequenceType where Trait == SingleTrait {
     }
 }
 
-public extension PrimitiveSequenceType where Trait == SingleTrait, Element: ValueContainer {
+public extension PrimitiveSequenceType where Trait == SingleTrait, Element: NetworkDataResponseType {
     /// Extracts value from NetworkResponse
     ///
     /// - Returns: Response value

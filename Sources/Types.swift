@@ -50,13 +50,30 @@ public enum HTTPMethod: String {
 public typealias Parameters = [String: Any]
 public typealias JSONDict = [String: Any]
 
-public protocol ValueContainer {
+//public protocol ValueContainer {
+//    associatedtype ValueType
+//
+//    var value: ValueType { get }
+//}
+
+public protocol NetworkerResponseType {
+    var response: HTTPURLResponse { get }
+
+    func validate() -> Bool
+}
+
+public protocol NetworkDataResponseType: NetworkerResponseType {
     associatedtype ValueType
-    
     var value: ValueType { get }
 }
 
-public struct NetworkerResponse<ResponseType>: ValueContainer {
+public extension NetworkerResponseType {
+    func validate() -> Bool {
+        return (200..<300).contains(response.statusCode)
+    }
+}
+
+public struct NetworkerResponse<ResponseType>: NetworkDataResponseType {
     public typealias ValueType = ResponseType
     public let response: HTTPURLResponse
     public let value: ResponseType
