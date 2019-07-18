@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |spec|
   spec.name         = "Networker"
-  spec.version      = "0.1.2"
+  spec.version      = "0.1.3"
   spec.summary      = "Network layer abstraction"
   spec.description  = <<-DESC
     Network layer to use for internal SDKs

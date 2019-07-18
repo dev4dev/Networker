@@ -43,21 +43,3 @@ public extension Encodable {
         return try JSONEncoder().encode(self)
     }
 }
-
-public extension Data {
-    
-    /// Converts Data to JSON
-    ///
-    /// - Returns: Optional. JSON
-    func toJSON() -> Any? {
-        return try? JSONSerialization.jsonObject(with: self, options: [])
-    }
-    
-    /// Converts Data to JSON
-    ///
-    /// - Returns: JSON
-    /// - Throws: JSON Conversion error
-    func attempToJSON() throws -> Any {
-        return try JSONSerialization.jsonObject(with: self, options: [])
-    }
-}
