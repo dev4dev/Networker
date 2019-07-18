@@ -23,7 +23,7 @@ public extension PrimitiveSequenceType where Trait == SingleTrait, Element == Ne
 public extension PrimitiveSequenceType where Trait == SingleTrait, Element == NetworkerResponse<String> {
     func toMappableModel<ObjectType: BaseMappable>(key: String? = nil, context: MapContext? = nil) -> PrimitiveSequence<Trait, NetworkerResponse<ObjectType>> {
         return map { data -> NetworkerResponse<ObjectType> in
-            if let key = key, let dict = data.value.toJSONDict(), let json = dict[key] as? [String: Any] {
+            if let key = key, let dict = data.value.toJSONDict(), let json = dict[keyPath: KeyPath(key)] as? JSONDict {
                 if let model = Mapper<ObjectType>(context: context).map(JSON: json) {
                     return data.update(data: model)
                 } else {
@@ -41,7 +41,7 @@ public extension PrimitiveSequenceType where Trait == SingleTrait, Element == Ne
     
     func toMappableModelsArray<ObjectType: BaseMappable>(key: String, context: MapContext? = nil) -> PrimitiveSequence<Trait, NetworkerResponse<[ObjectType]>> {
         return map { data -> NetworkerResponse<[ObjectType]> in
-            if let dict = data.value.toJSONDict(), let arr = dict[key] as? [[String: Any]] {
+            if let dict = data.value.toJSONDict(), let arr = dict[keyPath: KeyPath(key)] as? [JSONDict] {
                 let models = arr.compactMap { Mapper<ObjectType>(context: context).map(JSON: $0) }
                 return data.update(data: models)
             } else {

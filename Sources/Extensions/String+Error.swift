@@ -19,7 +19,7 @@ extension String: LocalizedError {
 }
 
 extension String {
-    func toJSONDict() -> [String: Any]? {
+    func toJSONDict() -> JSONDict? {
         let data = try? JSONSerialization.jsonObject(with: self.data(using: String.Encoding.utf8)!, options: [.allowFragments])
         if let data = data as? [String: Any] {
             return data

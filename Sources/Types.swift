@@ -48,6 +48,7 @@ public enum HTTPMethod: String {
 }
 
 public typealias Parameters = [String: Any]
+public typealias JSONDict = [String: Any]
 
 public protocol ValueContainer {
     associatedtype ValueType
