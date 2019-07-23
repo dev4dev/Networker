@@ -21,10 +21,19 @@ extension String: LocalizedError {
 extension String {
     func toJSONDict() -> JSONDict? {
         let data = try? JSONSerialization.jsonObject(with: self.data(using: String.Encoding.utf8)!, options: [.allowFragments])
-        if let data = data as? [String: Any] {
+        if let data = data as? JSONDict {
             return data
         }
         
+        return nil
+    }
+
+    func toJSONArray() -> [JSONDict]? {
+        let data = try? JSONSerialization.jsonObject(with: self.data(using: String.Encoding.utf8)!, options: [.allowFragments])
+        if let data = data as? [JSONDict] {
+            return data
+        }
+
         return nil
     }
 }

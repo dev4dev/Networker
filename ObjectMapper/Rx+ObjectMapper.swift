@@ -15,7 +15,7 @@ public extension PrimitiveSequenceType where Trait == SingleTrait, Element == Ne
         return toString().toMappableModel(key: key, context: context)
     }
     
-    func toMappableModelsArray<ObjectType: BaseMappable>(key: String, context: MapContext? = nil) -> PrimitiveSequence<Trait, NetworkerResponse<[ObjectType]>> {
+    func toMappableModelsArray<ObjectType: BaseMappable>(key: String?, context: MapContext? = nil) -> PrimitiveSequence<Trait, NetworkerResponse<[ObjectType]>> {
         return toString().toMappableModelsArray(key: key, context: context)
     }
 }
@@ -26,27 +26,29 @@ public extension PrimitiveSequenceType where Trait == SingleTrait, Element == Ne
             if let key = key, let dict = data.value.toJSONDict(), let json = dict[keyPath: KeyPath(key)] as? JSONDict {
                 if let model = Mapper<ObjectType>(context: context).map(JSON: json) {
                     return data.update(data: model)
-                } else {
-                    throw "Mapping to \(ObjectType.self) failed"
                 }
             } else {
                 if let model = Mapper<ObjectType>(context: context).map(JSONString: data.value) {
                     return data.update(data: model)
-                } else {
-                    throw "Mapping to \(ObjectType.self) failed"
                 }
             }
+
+            throw "Mapping to \(ObjectType.self) failed"
         }
     }
     
-    func toMappableModelsArray<ObjectType: BaseMappable>(key: String, context: MapContext? = nil) -> PrimitiveSequence<Trait, NetworkerResponse<[ObjectType]>> {
+    func toMappableModelsArray<ObjectType: BaseMappable>(key: String?, context: MapContext? = nil) -> PrimitiveSequence<Trait, NetworkerResponse<[ObjectType]>> {
         return map { data -> NetworkerResponse<[ObjectType]> in
-            if let dict = data.value.toJSONDict(), let arr = dict[keyPath: KeyPath(key)] as? [JSONDict] {
+            if let key = key {
+                if let dict = data.value.toJSONDict(), let arr = dict[keyPath: KeyPath(key)] as? [JSONDict] {
+                    let models = arr.compactMap { Mapper<ObjectType>(context: context).map(JSON: $0) }
+                    return data.update(data: models)
+                }
+            } else if let arr = data.value.toJSONArray() {
                 let models = arr.compactMap { Mapper<ObjectType>(context: context).map(JSON: $0) }
                 return data.update(data: models)
-            } else {
-                throw "Mapping to [\([ObjectType].self)] failed"
             }
+            throw "Mapping to [\([ObjectType].self)] failed"
         }
     }
 }
